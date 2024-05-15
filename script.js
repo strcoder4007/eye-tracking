@@ -1,10 +1,10 @@
 const video = document.getElementById('video')
 
 Promise.all([
-  faceapi.nets.tinyFaceDetector.loadFromUri('/models'),
-  faceapi.nets.faceLandmark68Net.loadFromUri('/models'),
-  faceapi.nets.faceRecognitionNet.loadFromUri('/models'),
-  faceapi.nets.faceExpressionNet.loadFromUri('/models')
+  faceapi.nets.tinyFaceDetector.loadFromUri('./models'),
+  faceapi.nets.faceLandmark68Net.loadFromUri('./models'),
+  faceapi.nets.faceRecognitionNet.loadFromUri('./models'),
+  faceapi.nets.faceExpressionNet.loadFromUri('./models')
 ]).then(startVideo)
 
 function startVideo() {
@@ -22,10 +22,10 @@ async function detectScreenAttention(videoElement) {
         let leftEye = detection.landmarks.getLeftEye()
         let rightEye = detection.landmarks.getRightEye()
 
-        console.log('Eyes detected')
+        document.getElementById('result').innerHTML = 'Eyes detected'
     });
     if (!detections.length) {
-        console.log('No eyes detected')
+        document.getElementById('result').innerHTML = 'No eyes detected'
     }
-}, 500);
+  }, 10)
 }
