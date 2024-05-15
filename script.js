@@ -24,9 +24,12 @@ async function detectScreenAttention(videoElement) {
         let rightEye = detection.landmarks.getRightEye()
 
         document.getElementById('result').innerHTML = 'Eyes detected'
+        // turn body background success green
+        document.body.style.backgroundColor = '#5cb85c'
     });
     if (!detections.length) {
         document.getElementById('result').innerHTML = 'No eyes detected'
+        document.body.style.backgroundColor = '#5c0512'
     }
   }, 10)
 }
