@@ -31,5 +31,5 @@ async function detectScreenAttention(videoElement) {
         document.getElementById('result').innerHTML = 'No eyes detected'
         document.body.style.backgroundColor = '#5c0512'
     }
-  }, 10)
+  }, 500)
 }
