@@ -162,22 +162,29 @@
         return;
     }
 
-    let parameters = [
-        // "browDownLeft",
-        // "browDownRight",
+    let parameters1 = [
         "eyeLookOutLeft", 
         "eyeLookOutRight", 
         "eyeLookInLeft", 
         "eyeLookInRight", 
         "eyeBlinkLeft", 
-        "eyeBlinkRight", 
+        "eyeBlinkRight"
+    ]
+    let parameters2 = [
+        "browDownLeft",
+        "browDownRight",
         "eyeLookDownLeft", 
         "eyeLookDownRight"
     ]
 
-    let myData = blendShapes[0].categories.filter((shape) => parameters.includes(shape.categoryName))
+    let myData = blendShapes[0].categories.filter((shape) => parameters1.includes(shape.categoryName) || parameters2.includes(shape.categoryName))
     let notLooking = false
-    myData.forEach(data => { if (data.score > 0.5) notLooking = true })
+
+    myData.forEach(data => { 
+        if ((parameters1.includes(data.categoryName) && data.score > 0.5) || (parameters2.includes(data.categoryName) && data.score > 0.75)) 
+            notLooking = true 
+    })
+
     if (notLooking) {
         document.getElementsByClassName('video-container')[0].style.border = '15px solid #5c0512'
         // document.body.style.backgroundColor = '#5c0512'
@@ -192,7 +199,7 @@
     blendShapes[0].categories.map((shape) => {
         htmlMaker += `
         <li class="blend-shapes-item">
-            ${parameters.includes(shape.categoryName) ? '&rarr;' : ''}
+            ${parameters1.includes(shape.categoryName) || parameters2.includes(shape.categoryName) ? '&rarr;' : ''}
             <span class="blend-shapes-label">${
             shape.displayName || shape.categoryName
             }</span>
