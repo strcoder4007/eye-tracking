@@ -16,7 +16,10 @@
     let runningMode = "IMAGE";
     let enableWebcamButton;
     let webcamRunning = false;
-    const videoWidth = 480;
+    // get the width of the screen
+
+    let videoWidth = Math.min(480, window.innerWidth - 30);
+
 
     // Before we can use HandLandmarker class we must wait for it to finish
     // loading. Machine Learning models can be large and take a moment to
@@ -233,6 +236,7 @@
     video {
       clear: both;
       display: block;
+      width: 100% !important;
       transform: rotateY(180deg);
       -webkit-transform: rotateY(180deg);
       -moz-transform: rotateY(180deg);
@@ -271,11 +275,16 @@
     }
 
     .video-container {
-        width: 480px;
+        width: auto;
+        max-width: 480px;
     }
 
     /* Css for screen size <= 1120 */
     @media (max-width: 1120px) {
+        body {
+        margin: 0em;
+        }
+        
       .videoView,
       .blend-shapes {
         width: 100%;
