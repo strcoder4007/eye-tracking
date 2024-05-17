@@ -160,6 +160,8 @@
     }
 
     let parameters = [
+        "browDownLeft",
+        "browDownRight",
         "eyeLookOutLeft", 
         "eyeLookOutRight", 
         "eyeLookInLeft", 
@@ -180,12 +182,14 @@
         document.getElementsByClassName('video-container')[0].style.border = '15px solid #5cb85c'
         // document.body.style.backgroundColor = '#5cb85c'
     }
-    console.log('>>>>', blendShapes[0]);
+    console.log('>>>>', myData);
     
     let htmlMaker = "";
+    
     blendShapes[0].categories.map((shape) => {
         htmlMaker += `
         <li class="blend-shapes-item">
+            ${parameters.includes(shape.categoryName) ? '&rarr;' : ''}
             <span class="blend-shapes-label">${
             shape.displayName || shape.categoryName
             }</span>
@@ -258,7 +262,6 @@
     }
     
     .videoView,
-    .detectOnClick,
     .blend-shapes {
       position: relative;
       float: left;
@@ -266,9 +269,21 @@
       margin: 2% 1%;
       cursor: pointer;
     }
+
+    .video-container {
+        width: 480px;
+    }
+
+    /* Css for screen size <= 1120 */
+    @media (max-width: 1120px) {
+      .videoView,
+      .blend-shapes {
+        width: 100%;
+        margin: 2% 0;
+      }
+    }
     
-    .videoView p,
-    .detectOnClick p {
+    .videoView p {
       position: absolute;
       padding: 5px;
       background-color: #007f8b;
@@ -288,7 +303,6 @@
     
     .canvas {
       z-index: 1;
-      position: absolute;
       pointer-events: none;
     }
     
@@ -296,14 +310,6 @@
       transform: rotateY(180deg);
       -webkit-transform: rotateY(180deg);
       -moz-transform: rotateY(180deg);
-    }
-    
-    .detectOnClick {
-      z-index: 0;
-    }
-    
-    .detectOnClick img {
-      width: 100%;
     }
     
     .blend-shapes-item {
@@ -314,7 +320,7 @@
     
     .blend-shapes-label {
       display: flex;
-      width: 120px;
+      width: 150px;
       justify-content: flex-end;
       align-items: center;
       margin-right: 4px;
@@ -324,7 +330,7 @@
       display: flex;
       height: 16px;
       align-items: center;
-      background-color: #007f8b;
+      background-color: #88ee69;
     }
     </style>
 </head>
