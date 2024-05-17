@@ -84,7 +84,7 @@
         video.srcObject = stream;
         let lastMove = 0;
         video.addEventListener("loadeddata", function() {
-            if(Date.now() - lastMove > 300) {
+            if(Date.now() - lastMove > 500) {
                 predictWebcam();
                 lastMove = Date.now();
             } 
